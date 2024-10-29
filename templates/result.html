@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+</head>
+<body>
+    <h1>Prediction Results</h1>
+
+    <!-- Display the pie chart for subclass distribution -->
+    <h2>Subclass Distribution:</h2>
+    <img src="data:image/png;base64,{{ pie_chart_url }}" alt="Subclass Distribution Pie Chart">
+
+    <hr>
+
+    <!-- Link to download the Excel file with predictions -->
+    <h2>Download Predictions:</h2>
+    <a href="{{ download_link }}">Download Excel with Predictions</a>
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marathi Hate Speech Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-lightblue">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+               <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
+                Hate Speech Classifier
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Section -->
+    <section class="hero-section d-flex align-items-center justify-content-center">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-lg-6 text-start">
+                    <h1 class="display-4 fw-bold">Hate Speech Classification in Marathi</h1>
+                    <p class="lead">This project is designed to automatically detect and classify hate speech in the
+                        Marathi language using advanced Natural Language Processing (NLP) techniques. </p>
+                    <p class="lead">You can easily upload text or CSV files containing Marathi content, and the system
+                        will classify whether the content contains hate speech.</p>
+                </div>
+                <div class="col-lg-6 d-flex justify-content-center align-items-center">
+                    <div class="image-container">
+                       <img src="{{ url_for('static', filename='images/happy.png') }}" alt="Happy" class="happy-image" id="happyImage">
+                        <img src="{{ url_for('static', filename='images/angry.png') }}" alt="Angry" class="angry-image" id="angryImage">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <div class="container">
+        <form action="/classify-text" method="post" class="form">
+            <h2>Classify Text</h2>
+            <textarea name="text" rows="5" placeholder="Enter text in Marathi" required></textarea>
+            <button type="submit">Classify Text</button>
+        </form>
+
+        {% if predicted_label is not none %}
+        <div class="result">
+            <h3>Results</h3>
+            <p><strong>Input Text:</strong> {{ text }}</p>
+            <p><strong>Predicted Label:</strong> {{ predicted_label }}</p>
+            <p><strong>Predicted Subclass:</strong> {{ predicted_subclass }}</p>
+        </div>
+        {% endif %}
+
+        <form action="/classify-csv" method="post" enctype="multipart/form-data" class="form">
+            <h2>Classify CSV</h2>
+            <input type="file" name="file" accept=".csv" required>
+            <button type="submit">Upload CSV</button>
+        </form>
+    </div>
+    <!-- Footer -->
+<footer>
+    <p>&copy; 2024 Hate Speech Detection Project. All rights reserved.</p>
+</footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Marathi Hate Speech Detection</title>-->
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <link rel="stylesheet" href="static/css/hero.css">-->
+<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">-->
+<!--    <style>-->
+
+
+<!--&lt;!&ndash;        hero&ndash;&gt;-->
+<!--/* General Styles */-->
+<!--body {-->
+<!--    font-family: 'Arial', sans-serif;-->
+<!--    background-color: #f0f4f9;-->
+<!--}-->
+
+<!--/* Navbar Styles */.bg-lightblue {-->
+<!--    background-color: #E3F2FD; /* Light blue background */-->
+<!--    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);-->
+<!--}-->
+
+<!--.navbar-brand {-->
+<!--    color: #0D47A1;-->
+<!--    font-size: 1.3rem;-->
+<!--    font-weight: 600;-->
+<!--}-->
+
+<!--.nav-link {-->
+<!--    color: #0D47A1 !important;-->
+<!--    font-weight: 500;-->
+<!--    transition: color 0.3s, background-color 0.3s;-->
+<!--    padding: 10px 15px;-->
+<!--    border-radius: 5px;-->
+<!--}-->
+
+<!--.nav-link:hover {-->
+<!--    color: #fff !important;-->
+<!--    background-color: #1976D2;-->
+<!--}-->
+
+<!--/* Hero Section */-->
+<!--.hero-section {-->
+<!--    background: linear-gradient(135deg, #e3f2fd, #ffffff);-->
+<!--    padding: 80px 0;-->
+<!--}-->
+
+<!--.hero-section h1 {-->
+<!--    color: #0D47A1;-->
+<!--    margin-bottom: 20px;-->
+<!--    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);-->
+<!--}-->
+
+<!--.hero-section p {-->
+<!--    color: #495057;-->
+<!--    margin-bottom: 30px;-->
+<!--    font-size: 1.1rem;-->
+<!--}-->
+
+<!--.btn-gradient {-->
+<!--    background: linear-gradient(90deg, #FF4081 0%, #F50057 100%);-->
+<!--    border: none;-->
+<!--    padding: 12px 30px;-->
+<!--    font-size: 1.1rem;-->
+<!--    color: #fff;-->
+<!--    box-shadow: 0 4px 10px rgba(255, 64, 129, 0.5);-->
+<!--}-->
+
+<!--.btn-gradient:hover {-->
+<!--    background: linear-gradient(90deg, #F50057 0%, #FF4081 100%);-->
+<!--}-->
+
+<!--/* Image Styling */-->
+<!--.image-container {-->
+<!--    position: relative;-->
+<!--    width: 350px;  /* Increased width */-->
+<!--    height: 450px; /* Increased height */-->
+<!--    margin-right: 200px; /* Shifted the container to the right */-->
+<!--}-->
+
+<!--.image-container img {-->
+<!--    position: absolute;-->
+<!--    max-width: 100%;  /* Ensures images fit within the container */-->
+<!--    max-height: 100%;-->
+<!--    transition: opacity 0.3s ease-in-out;-->
+<!--}-->
+
+<!--.happy-image {-->
+<!--    opacity: 1;-->
+<!--}-->
+
+<!--.angry-image {-->
+<!--    opacity: 0;-->
+<!--}-->
+
+<!--.image-container:hover .happy-image {-->
+<!--    opacity: 0;-->
+<!--}-->
+
+<!--.image-container:hover .angry-image {-->
+<!--    opacity: 1;-->
+<!--}-->
+
+<!--/* Responsive Adjustments */-->
+<!--@media (max-width: 992px) {-->
+<!--    .hero-section {-->
+<!--        text-align: center;-->
+<!--    }-->
+
+<!--    .col-lg-6 {-->
+<!--        margin-bottom: 40px;-->
+<!--    }-->
+
+<!--    .image-container {-->
+<!--        width: 220px;-->
+<!--        height: 300px;-->
+<!--    }-->
+<!--}-->
+
+<!--&lt;!&ndash;        hero&ndash;&gt;-->
+<!--        /* styles.css */-->
+
+<!--/* General Styles */-->
+<!--body {-->
+<!--    font-family: Arial, sans-serif;-->
+<!--    background-color: #f4f4f4;-->
+<!--    margin: 0;-->
+<!--    padding: 0;-->
+<!--}-->
+<!--.container {-->
+<!--    max-width: 800px;-->
+<!--    margin: 50px auto;-->
+<!--    padding: 20px;-->
+<!--    background-color: #fff;-->
+<!--    border-radius: 8px;-->
+<!--    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);-->
+<!--}-->
+
+<!--/* Headings */-->
+<!--h1 {-->
+<!--    text-align: center;-->
+<!--    color: #333;-->
+<!--}-->
+
+<!--h2 {-->
+<!--    color: #555;-->
+<!--}-->
+
+<!--/* Form Styles */-->
+<!--.form {-->
+<!--    margin-bottom: 20px;-->
+<!--    padding: 15px;-->
+<!--    border: 1px solid #ddd;-->
+<!--    border-radius: 5px;-->
+<!--}-->
+
+<!--textarea {-->
+<!--    width: 100%;-->
+<!--    padding: 10px;-->
+<!--    margin: 10px 0;-->
+<!--    border: 1px solid #ccc;-->
+<!--    border-radius: 4px;-->
+<!--    resize: vertical;-->
+<!--}-->
+
+<!--button {-->
+<!--    background-color: #007bff;-->
+<!--    color: white;-->
+<!--    border: none;-->
+<!--    padding: 10px 15px;-->
+<!--    border-radius: 5px;-->
+<!--    cursor: pointer;-->
+<!--    font-size: 16px;-->
+<!--}-->
+
+<!--button:hover {-->
+<!--    background-color: #0056b3;-->
+<!--}-->
+
+<!--/* Result Styles */-->
+<!--.result {-->
+<!--    margin-top: 20px;-->
+<!--    padding: 15px;-->
+<!--    background-color: #e9ffe9;-->
+<!--    border: 1px solid #c3e6cb;-->
+<!--    border-radius: 5px;-->
+<!--}-->
+
+<!--.result p {-->
+<!--    margin: 5px 0;-->
+<!--    color: #333;-->
+<!--}-->
+
+<!--/* Input File Styles */-->
+<!--input[type="file"] {-->
+<!--    margin-top: 10px;-->
+<!--    padding: 5px;-->
+<!--}-->
+<!--</style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--    &lt;!&ndash; Navbar &ndash;&gt;-->
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-lightblue">-->
+<!--        <div class="container-fluid">-->
+<!--            <a class="navbar-brand" href="#">-->
+<!--                <img src="images/logo.jpg" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">-->
+<!--                Hate Speech Classifier-->
+<!--            </a>-->
+<!--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--                <span class="navbar-toggler-icon"></span>-->
+<!--            </button>-->
+
+<!--        </div>-->
+<!--    </nav>-->
+
+
+<!--    &lt;!&ndash; Main Section &ndash;&gt;-->
+<!--    <section class="hero-section d-flex align-items-center">-->
+<!--        <div class="container text-center">-->
+<!--            <div class="row">-->
+<!--                <div class="col-lg-6 text-start">-->
+<!--                    <h1 class="display-4 fw-bold">Hate Speech Classification in Marathi</h1>-->
+<!--                    <p class="lead">This project is designed to automatically detect and classify hate speech in the Marathi language using advanced Natural Language Processing (NLP) techniques. </p>-->
+<!--                    <p class="lead">You can easily upload text or CSV files containing Marathi content, and the system will classify whether the content contains hate speech.</p>-->
+
+<!--                </div>-->
+<!--                <div class="col-lg-6 d-flex justify-content-center align-items-center">-->
+<!--                    <div class="image-container">-->
+
+<!--                        <img src="images/angry.png" alt="Happy" class="happy-image" id="happyImage">-->
+<!--                        <img src="images/happy.pngg" alt="Angry" class="angry-image" id="angryImage">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+
+
+
+
+
+
+
+
+
+
+
+<!--    <div class="container">-->
+
+
+<!--        <form action="/classify-text" method="post" class="form">-->
+<!--            <h2>Classify Text</h2>-->
+<!--            <textarea name="text" rows="5" placeholder="Enter text in Marathi" required></textarea>-->
+<!--            <button type="submit">Classify Text</button>-->
+<!--        </form>-->
+
+<!--        {% if predicted_label is not none %}-->
+<!--        <div class="result">-->
+<!--            <h3>Results</h3>-->
+<!--            <p><strong>Input Text:</strong> {{ text }}</p>-->
+<!--            <p><strong>Predicted Label:</strong> {{ predicted_label }}</p>-->
+<!--            <p><strong>Predicted Subclass:</strong> {{ predicted_subclass }}</p>-->
+<!--        </div>-->
+<!--        {% endif %}-->
+
+<!--        <form action="/classify-csv" method="post" enctype="multipart/form-data" class="form">-->
+<!--            <h2>Classify CSV</h2>-->
+<!--            <input type="file" name="file" accept=".csv" required>-->
+<!--            <button type="submit">Upload CSV</button>-->
+<!--        </form>-->
+<!--    </div>-->
+
+<!--    <script src="{{ url_for('static', filename='js/script.js') }}"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Marathi Hate Speech Detection</title>-->
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">-->
+<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">-->
+<!--    <style>/* styles.css */-->
+
+<!--/* General Styles */-->
+<!--body {-->
+<!--    font-family: Arial, sans-serif;-->
+<!--    background-color: #f4f4f4;-->
+<!--    margin: 0;-->
+<!--    padding: 0;-->
+<!--}-->
+
+<!--.container {-->
+<!--    max-width: 800px;-->
+<!--    margin: 50px auto;-->
+<!--    padding: 20px;-->
+<!--    background-color: #fff;-->
+<!--    border-radius: 8px;-->
+<!--    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);-->
+<!--}-->
+
+<!--/* Headings */-->
+<!--h1 {-->
+<!--    text-align: center;-->
+<!--    color: #333;-->
+<!--}-->
+
+<!--h2 {-->
+<!--    color: #555;-->
+<!--}-->
+
+<!--/* Form Styles */-->
+<!--.form {-->
+<!--    margin-bottom: 20px;-->
+<!--    padding: 15px;-->
+<!--    border: 1px solid #ddd;-->
+<!--    border-radius: 5px;-->
+<!--}-->
+
+<!--textarea {-->
+<!--    width: 100%;-->
+<!--    padding: 10px;-->
+<!--    margin: 10px 0;-->
+<!--    border: 1px solid #ccc;-->
+<!--    border-radius: 4px;-->
+<!--    resize: vertical;-->
+<!--}-->
+
+<!--button {-->
+<!--    background-color: #007bff;-->
+<!--    color: white;-->
+<!--    border: none;-->
+<!--    padding: 10px 15px;-->
+<!--    border-radius: 5px;-->
+<!--    cursor: pointer;-->
+<!--    font-size: 16px;-->
+<!--}-->
+
+<!--button:hover {-->
+<!--    background-color: #0056b3;-->
+<!--}-->
+
+<!--/* Result Styles */-->
+<!--.result {-->
+<!--    margin-top: 20px;-->
+<!--    padding: 15px;-->
+<!--    background-color: #e9ffe9;-->
+<!--    border: 1px solid #c3e6cb;-->
+<!--    border-radius: 5px;-->
+<!--}-->
+
+<!--.result p {-->
+<!--    margin: 5px 0;-->
+<!--    color: #333;-->
+<!--}-->
+
+<!--/* Input File Styles */-->
+<!--input[type="file"] {-->
+<!--    margin-top: 10px;-->
+<!--    padding: 5px;-->
+<!--}-->
+<!--</style>-->
+<!--</head>-->
+<!--<body>-->
+
+
+
+
+
+
+
+
+
+
+
+
+<!--    <div class="container">-->
+<!--        <h1>Marathi Hate Speech Detection</h1>-->
+
+<!--        <form action="/classify-text" method="post" class="form">-->
+<!--            <h2>Classify Text</h2>-->
+<!--            <textarea name="text" rows="5" placeholder="Enter text in Marathi" required></textarea>-->
+<!--            <button type="submit">Classify Text</button>-->
+<!--        </form>-->
+
+<!--        {% if predicted_label is not none %}-->
+<!--        <div class="result">-->
+<!--            <h3>Results</h3>-->
+<!--            <p><strong>Input Text:</strong> {{ text }}</p>-->
+<!--            <p><strong>Predicted Label:</strong> {{ predicted_label }}</p>-->
+<!--            <p><strong>Predicted Subclass:</strong> {{ predicted_subclass }}</p>-->
+<!--        </div>-->
+<!--        {% endif %}-->
+
+<!--        <form action="/classify-csv" method="post" enctype="multipart/form-data" class="form">-->
+<!--            <h2>Classify CSV</h2>-->
+<!--            <input type="file" name="file" accept=".csv" required>-->
+<!--            <button type="submit">Upload CSV</button>-->
+<!--        </form>-->
+<!--    </div>-->
+
+<!--    <script src="{{ url_for('static', filename='js/script.js') }}"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>-->
+<!--</body>-->
+<!--</html>-->

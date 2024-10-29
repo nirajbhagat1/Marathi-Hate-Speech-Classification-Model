@@ -1,0 +1,143 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif; /* Font for the entire body */
+    background-color: #f8f9fa; /* Light background color */
+    color: #333; /* Dark text color */
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: #e3f2fd; /* Light blue background */
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 60px 0; /* Padding for top and bottom */
+    background-color: #f0f8ff; /* Light background color for hero section */
+}
+
+/* Main Heading */
+.display-4 {
+    color: #007bff; /* Primary color for main heading */
+}
+
+/* Image Container */
+.image-container {
+    position: relative;
+    width: 100%; /* Full width for responsiveness */
+    max-width: 450px; /* Max width for the image container */
+    height: 450px; /* Fixed height for the image container */
+    overflow: hidden; /* Ensure images stay within the bounds */
+    margin: 0 auto; /* Center the container */
+}
+
+.image-container img {
+    position: absolute;
+    margin-top:-50px;
+    margin-left:-150px;
+    width: 350px; /* Set to 100% for full visibility */
+    height: auto; /* Maintain aspect ratio */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition for opacity */
+}
+
+.happy-image {
+    opacity: 1; /* Fully visible by default */
+}
+
+.angry-image {
+    opacity: 0; /* Initially hidden */
+}
+
+/* Hover Effect */
+.image-container:hover .happy-image {
+    opacity: 0; /* Fade out happy image */
+}
+
+.image-container:hover .angry-image {
+    opacity: 1; /* Fade in angry image */
+}
+
+/* Form Styling */
+.container {
+    margin-top: 40px; /* Space above the forms */
+}
+
+.form {
+    background-color: #ffffff; /* White background for forms */
+    padding: 20px; /* Padding inside the form */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin-bottom: 30px; /* Space below the form */
+}
+
+.form h2 {
+    color: #007bff; /* Color for form headings */
+    margin-bottom: 15px; /* Space below headings */
+}
+
+textarea {
+    width: 100%; /* Full width for textarea */
+    border: 1px solid #ced4da; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding inside textarea */
+    resize: vertical; /* Allow vertical resizing only */
+}
+
+button {
+    background-color: #007bff; /* Primary button color */
+    color: #ffffff; /* White text for buttons */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 15px; /* Padding for buttons */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+/* Result Section */
+.result {
+    background-color: #e2f0d9; /* Light green background for results */
+    padding: 15px; /* Padding for results section */
+    border-radius: 5px; /* Rounded corners */
+    margin-top: 20px; /* Space above results */
+}
+
+.result h3 {
+    color: #28a745; /* Green color for results heading */
+}
+
+.result p {
+    margin: 5px 0; /* Space between paragraphs */
+}
+
+/* Footer Styling */
+footer {
+    background-color: #007bff; /* Footer background color */
+    color: white; /* Text color */
+    text-align: center; /* Center text */
+    padding: 15px 0; /* Padding for footer */
+    position: relative; /* For positioning */
+    bottom: 0; /* Stick to bottom */
+    width: 100%; /* Full width */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 40px 0; /* Less padding on smaller screens */
+    }
+
+    .image-container {
+        width: 100%; /* Full width for images on small screens */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .display-4 {
+        font-size: 1.8rem; /* Smaller font size for headings */
+    }
+}
