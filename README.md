@@ -155,4 +155,9 @@ Before you begin, ensure you have the following installed on your system:
   ```
 
 - Make sure your environment variables are set up correctly if you're using any specific configurations for your Flask app.
-```
+
+
+#DEMO VIDEO
+<iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7247526508775321600?compact=1" height="399" width="710" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+
+https://www.linkedin.com/posts/nirajbhagat7803_machinelearning-hatespeechdetection-marathilanguage-activity-7247526587212951554-aLrT?utm_source=share&utm_medium=member_desktop
